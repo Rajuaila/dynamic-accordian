@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<head>
+  <title>Dynamic Accordion</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #080707;
+    }
+
+    #accordion-container {
+      width: 300px;
+    }
+
+    .accordion-item {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 5px;
+    }
+
+    .accordion-title {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #f1f1f1;
+    }
+
+    .accordion-content {
+      display: none;
+      padding: 10px;
+    }
+
+    .custom-btn {
+      margin: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="accordion-container"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const accordionContainer = document.getElementById('accordion-container');
+
+    function createAccordionItem(title, description) {
+      const accordionItem = document.createElement('div');
+      accordionItem.className = 'accordion-item';
+
+      const titleElement = document.createElement('div');
+      titleElement.className = 'accordion-title';
+      titleElement.textContent = title;
+      titleElement.addEventListener('click', () => toggleAccordion(accordionItem));
+
+      const contentElement = document.createElement('div');
+      contentElement.className = 'accordion-content';
+      contentElement.textContent = description;
+
+      accordionItem.appendChild(titleElement);
+      accordionItem.appendChild(contentElement);
+
+      return accordionItem;
+    }
+
+    function toggleAccordion(accordionItem) {
+      const contentElement = accordionItem.querySelector('.accordion-content');
+      contentElement.style.display = (contentElement.style.display === 'none' || contentElement.style.display === '') ? 'block' : 'none';
+    }
+
+    function addAccordion() {
+      const title = prompt('Enter accordion title:');
+      const description = prompt('Enter accordion description:');
+      const accordionItem = createAccordionItem(title, description);
+      accordionContainer.appendChild(accordionItem);
+    }
+
+    const addButton = document.createElement('button');
+    addButton.textContent = 'Add Accordion';
+    addButton.className = 'custom-btn';
+    addButton.addEventListener('click', addAccordion);
+
+    accordionContainer.appendChild(addButton);
+  });
+</script>
+
+</body>
+</html>
